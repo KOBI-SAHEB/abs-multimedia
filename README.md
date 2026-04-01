@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👑 ABS SERIES AI | Professional Video Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@500;700&display=swap');
+        body { background: #020617; color: #fff; font-family: 'Rajdhani', sans-serif; }
+        .font-tech { font-family: 'Orbitron', sans-serif; }
+        .cosmic-card { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 30px; }
+        .gold-text { background: linear-gradient(to bottom, #fff9c4, #fbbf24, #b45309); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        iframe { border-radius: 20px; background: #000; border: 1px solid rgba(251, 191, 36, 0.2); }
+    </style>
+</head>
+<body class="min-h-screen py-10 px-4 flex flex-col items-center">
+    <header class="text-center mb-10">
+        <i class="fas fa-crown text-4xl text-yellow-500 mb-4 block"></i>
+        <h1 class="font-tech text-4xl font-black gold-text tracking-tighter">ABS SERIES AI ENGINE</h1>
+        <p class="text-cyan-400 text-[10px] tracking-[0.5em] uppercase mt-2">The Universe Poet's Studio</p>
+    </header>
+    <div class="max-w-6xl w-full cosmic-card p-6 md:p-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <div class="flex flex-col gap-6">
+                <h3 class="font-tech text-yellow-500 text-xs uppercase tracking-widest">Master Control</h3>
+                <textarea id="visionInput" rows="6" class="w-full bg-black/60 border border-white/10 rounded-2xl p-4 text-sm focus:border-yellow-500 transition-all outline-none" placeholder="আপনার আইডিয়া এখানে লিখুন..."></textarea>
+                <button onclick="startGen()" class="bg-yellow-500 text-black font-tech font-black py-4 rounded-xl hover:scale-105 transition-all uppercase text-xs">Generate Video</button>
+            </div>
+            <div class="flex flex-col gap-4">
+                <h3 class="font-tech text-cyan-400 text-xs uppercase tracking-widest">Live AI Engine</h3>
+                <div class="aspect-video rounded-2xl overflow-hidden shadow-2xl">
+                    <iframe id="aiEngine" src="https://mishig-stable-video-diffusion.hf.space" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function startGen() {
+            const msg = new SpeechSynthesisUtterance("Initializing ABS Video Engine. Please use the AI panel.");
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
