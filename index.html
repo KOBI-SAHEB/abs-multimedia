@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABS SERIES MULTIMEDIA | Cosmic AI Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap');
+
+        :root { --bg: #020617; --card: rgba(15, 23, 42, 0.75); --text: #ffffff; --accent: #06b6d4; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Rajdhani', sans-serif; overflow-x: hidden; }
+        .font-tech { font-family: 'Orbitron', sans-serif; }
+
+        /* Fullscreen Video/Image Background */
+        .bg-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.8)), 
+                        url('https://i.ibb.co/RkPz0y0/cosmic-king.jpg'); /* তোমার দেওয়া ছবির লিঙ্ক এখানে বসাতে পারো */
+            background-size: cover; background-position: center; z-index: -1;
+        }
+
+        .gold-brand {
+            background: linear-gradient(to bottom, #fff9c4, #fbbf24, #b45309);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.6));
+        }
+
+        .tool-card {
+            background: var(--card);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 30px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .tool-card:hover { transform: translateY(-15px); border-color: #fbbf24; box-shadow: 0 0 40px rgba(251, 191, 36, 0.2); }
+
+        /* Welcome Screen */
+        #welcomeOverlay {
+            position: fixed; inset: 0; background: #020617; z-index: 10000;
+            display: flex; align-items: center; justify-content: center; flex-direction: column;
+        }
+        .enter-btn {
+            padding: 20px 50px; background: transparent; border: 2px solid #fbbf24;
+            color: #fbbf24; font-family: 'Orbitron', sans-serif; font-weight: 900;
+            letter-spacing: 5px; cursor: pointer; transition: 0.5s;
+        }
+        .enter-btn:hover { background: #fbbf24; color: #000; box-shadow: 0 0 50px #fbbf24; }
+
+        #toast { visibility: hidden; background: #fbbf24; color: #000; padding: 15px 40px; border-radius: 50px; position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 1000; font-weight: bold; }
+        #toast.show { visibility: visible; animation: pop 0.5s forwards; }
+        @keyframes pop { from { bottom: 0; opacity: 0; } to { bottom: 40px; opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div id="welcomeOverlay">
+        <h1 class="font-tech text-3xl gold-brand mb-10 tracking-[0.5em] text-center px-4">ABS SERIES MULTIMEDIA</h1>
+        <button class="enter-btn" onclick="startUniverse()">ENTER KINGDOM</button>
+        <p class="text-slate-500 mt-6 text-xs uppercase tracking-widest">Powered by Mohabiswo Raja AI</p>
+    </div>
+
+    <div class="bg-overlay"></div>
+    <canvas id="stars" class="fixed inset-0 z-0 opacity-40"></canvas>
+
+    <nav class="p-8 flex justify-between items-center max-w-7xl mx-auto w-full relative z-10">
+        <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-gradient-to-br from-yellow-400 to-amber-700 rounded-2xl flex items-center justify-center shadow-2xl shadow-yellow-500/20">
+                <i class="fas fa-crown text-black text-3xl"></i>
+            </div>
+            <div>
+                <span class="font-tech font-black text-2xl tracking-tighter gold-brand block">ABS SERIES</span>
+                <span class="text-[10px] text-cyan-400 tracking-[0.4em] uppercase font-bold">Multimedia</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-6">
+            <div id="google_translate_element" class="hidden lg:block"></div>
+            <button onclick="copyURL()" class="bg-yellow-600 hover:bg-yellow-500 text-black px-8 py-3 rounded-full text-xs font-black tracking-widest transition-all transform hover:scale-105">SHARE URL</button>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-20 text-center relative z-10">
+        <h2 class="text-6xl md:text-9xl font-tech font-black gold-brand mb-6 tracking-tighter">COSMIC STUDIO</h2>
+        <p class="text-cyan-400 font-bold uppercase tracking-[1.2em] text-xs md:text-sm mb-16">Unleash the Power of AI</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 max-w-7xl mx-auto">
+            <div class="tool-card p-12 cursor-pointer group" onclick="action('Text to Video')">
+                <i class="fas fa-microchip text-cyan-400 text-5xl mb-8 group-hover:rotate-12 transition-transform"></i>
+                <h3 class="font-tech text-xl font-bold">Text to Video</h3>
+                <p class="text-slate-400 text-xs mt-4">Create cinematic worlds from words.</p>
+            </div>
+            <div class="tool-card p-12 cursor-pointer group" onclick="action('Image to AI')">
+                <i class="fas fa-bolt text-yellow-400 text-5xl mb-8 group-hover:scale-110 transition-transform"></i>
+                <h3 class="font-tech text-xl font-bold">Image to AI</h3>
+                <p class="text-slate-400 text-xs mt-4">Animate your royal portraits.</p>
+            </div>
+            <div class="tool-card p-12 cursor-pointer group" onclick="action('Cinematic Styling')">
+                <i class="fas fa-gem text-pink-500 text-5xl mb-8 group-hover:shadow-lg transition-transform"></i>
+                <h3 class="font-tech text-xl font-bold">AI Styling</h3>
+                <p class="text-slate-400 text-xs mt-4">Apply 8K cinematic textures.</p>
+            </div>
+            <div class="tool-card p-12 cursor-pointer group" onclick="action('Audio Sync')">
+                <i class="fas fa-waveform text-green-400 text-5xl mb-8 group-hover:animate-pulse"></i>
+                <h3 class="font-tech text-xl font-bold">Audio Visual</h3>
+                <p class="text-slate-400 text-xs mt-4">Sync beats with cosmic visuals.</p>
+            </div>
+        </div>
+
+        <div class="mt-24 max-w-xl mx-auto bg-white/5 border border-white/10 p-4 rounded-3xl flex items-center justify-between backdrop-blur-md">
+            <span id="appLink" class="text-slate-500 text-xs font-mono truncate ml-4">https://abs-series-multimedia.github.io</span>
+            <button onclick="copyURL()" class="bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-500 px-6 py-2 rounded-2xl text-xs font-bold uppercase border border-yellow-500/30">Copy URL</button>
+        </div>
+    </main>
+
+    <footer class="p-12 text-center border-t border-white/5 text-slate-600 text-[10px] tracking-[0.5em] relative z-10">
+        © 2026 ABS SERIES MULTIMEDIA | THE KINGDOM OF AI
+    </footer>
+
+    <div id="toast">👑 COSMIC LINK COPIED!</div>
+
+    <script>
+        // Star Background
+        const canvas = document.getElementById('stars');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let stars = [];
+        for(let i=0; i<200; i++) stars.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*2});
+        function drawStars() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = "#fff";
+            stars.forEach(s => { ctx.beginPath(); ctx.arc(s.x, s.y, s.s, 0, Math.PI*2); ctx.fill(); s.y += 0.2; if(s.y > canvas.height) s.y = 0; });
+            requestAnimationFrame(drawStars);
+        }
+        drawStars();
+
+        // Voice Greeting & Startup
+        function startUniverse() {
+            document.getElementById('welcomeOverlay').style.display = 'none';
+            const msg = new SpeechSynthesisUtterance("Welcome to the Kingdom of ABS SERIES MULTIMEDIA. I am your AI assistant.");
+            msg.pitch = 0.6; msg.rate = 0.9;
+            window.speechSynthesis.speak(msg);
+        }
+
+        function copyURL() {
+            navigator.clipboard.writeText(window.location.href);
+            const t = document.getElementById('toast');
+            t.className = "show"; setTimeout(() => t.className = "", 3000);
+        }
+
+        function action(t) { alert(t + " is initializing in the Cosmic Cloud..."); }
+        function googleTranslateElementInit() { new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element'); }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
